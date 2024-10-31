@@ -18,4 +18,12 @@ public class Learner extends User {
     @NotNull(message = "Class is required")
     private Class classEntity;
 
+
+    public Class getClassEntity() {
+        return classEntity;
+    }
+
+    public void setClassEntity(Class classEntity) {
+        this.classEntity = classEntity;
+    }
 }

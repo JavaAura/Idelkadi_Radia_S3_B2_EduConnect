@@ -27,7 +27,6 @@ public class Class {
     @OneToMany(mappedBy = "classEntity")
     private List<Learner> learners;
 
-
     @OneToOne(mappedBy = "classEntity")
     private Trainer trainers ;
 }

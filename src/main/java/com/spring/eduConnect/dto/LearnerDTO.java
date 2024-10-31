@@ -6,5 +6,13 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = false)
 public class LearnerDTO extends UserDTO {
     private String level;
-    private Long classId; // Assuming class has an ID to reference
+    private Long classId;
+
+    public Long getClassId() {
+        return classId;
+    }
+
+    public void setClassId(Long classId) {
+        this.classId = classId;
+    }
 }

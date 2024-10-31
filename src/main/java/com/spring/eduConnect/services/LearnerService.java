@@ -12,5 +12,13 @@ import java.util.stream.Collectors;
 @Service
 public interface LearnerService {
 
+    LearnerDTO createLearner(LearnerDTO learnerDTO);
+
+    LearnerDTO updateLearner(Long id, LearnerDTO learnerDTO);
+
+    LearnerDTO getLearnerById(Long id);
+
+    List<LearnerDTO> getAllLearners();
+    void deleteLearner(Long id);
 }
 
