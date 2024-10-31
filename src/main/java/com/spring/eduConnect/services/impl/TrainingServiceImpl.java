@@ -2,12 +2,16 @@ package com.spring.eduConnect.services.impl;
 
 import com.spring.eduConnect.dto.TrainingDTO;
 import com.spring.eduConnect.entities.Training;
+import com.spring.eduConnect.entities.enums.TrainingStatus;
 import com.spring.eduConnect.repositories.TrainingRepository;
 import com.spring.eduConnect.services.TrainingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,4 +65,32 @@ public class TrainingServiceImpl implements TrainingService {
         }
         trainingRepository.deleteById(id);
     }
+
+    @Override
+    public List<TrainingDTO> getTrainingsByTitle(String title) {
+        return trainingRepository.findByTitle(title).stream()
+                .map(training -> modelMapper.map(training, TrainingDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TrainingDTO> getTrainingsByLevelAndStatus(String level, TrainingStatus status) {
+        return trainingRepository.findByLevelAndStatus(level, status).stream()
+                .map(training -> modelMapper.map(training, TrainingDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TrainingDTO> getTrainingsWithinDateRange(LocalDate startDate, LocalDate endDate) {
+        return trainingRepository.findTrainingsWithinDateRange(startDate, endDate).stream()
+                .map(training -> modelMapper.map(training, TrainingDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<TrainingDTO> getAllTrainingsPaginated(Pageable pageable) {
+        return trainingRepository.findAll(pageable)
+                .map(training -> modelMapper.map(training, TrainingDTO.class));
+    }
+
 }
