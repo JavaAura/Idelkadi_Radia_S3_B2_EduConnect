@@ -16,11 +16,6 @@ public class LearnerService {
     @Autowired
     private LearnerRepository learnerRepository;
 
-    public List<LearnerDTO> getAllLearners() {
-        return learnerRepository.findAll()
-                .stream()
-                .map(learner -> new LearnerDTO(learner.getId(), learner.getFName() , learner.getLName(), learner.getEmail(), learner.getLevel(), 1L))
-                .collect(Collectors.toList());
-    }
+
 }
 

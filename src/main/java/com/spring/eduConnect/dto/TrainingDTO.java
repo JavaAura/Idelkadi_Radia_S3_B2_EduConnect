@@ -1,12 +1,15 @@
 package com.spring.eduConnect.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import com.spring.eduConnect.entities.enums.TrainingStatus;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
+@ToString
 public class TrainingDTO {
     private Long id;
     private String title;
@@ -16,5 +19,5 @@ public class TrainingDTO {
     private int maxCapacity;
     private LocalDate startDate;
     private LocalDate endDate;
-    private String status;
+    private TrainingStatus status;
 }

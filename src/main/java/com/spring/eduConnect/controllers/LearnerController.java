@@ -13,8 +13,4 @@ public class LearnerController {
     @Autowired
     private LearnerService learnerService;
 
-    @GetMapping("/api/learners")
-    public List<LearnerDTO> getAllLearners() {
-        return learnerService.getAllLearners();
     }
-}

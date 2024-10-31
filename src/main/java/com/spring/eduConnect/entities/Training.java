@@ -31,10 +31,10 @@ public class Training {
     private String prerequisites;
 
     @NotNull(message = "Minimum capacity is required")
-    private Integer minimumCapacity;
+    private int minimumCapacity;
 
     @NotNull(message = "Maximum capacity is required")
-    private Integer maximumCapacity;
+    private int maximumCapacity;
 
     @NotNull(message = "Start date is required")
     private LocalDate startDate;
@@ -53,4 +53,5 @@ public class Training {
 
     @OneToMany(mappedBy = "training")
     private List<Class> classes;
+
 }

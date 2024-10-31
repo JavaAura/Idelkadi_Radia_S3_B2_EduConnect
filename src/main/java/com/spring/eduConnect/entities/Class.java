@@ -28,6 +28,10 @@ public class Class {
     @JoinColumn(name = "training_id")
     private Training training;
 
-    @ManyToMany(mappedBy = "classes")
+    @OneToMany(mappedBy = "classEntity")
     private List<Learner> learners;
+
+
+    @OneToMany(mappedBy = "classEntity")
+    private List<Trainer> trainers ;
 }

@@ -21,9 +21,6 @@ public class Trainer extends User {
     private Training training;
 
     @ManyToOne
-    @JoinColumn(name = "trainer_id")
-    private Trainer trainer;
-
-    @OneToMany(mappedBy = "trainingClass")
-    private List<Learner> learners;
+    @JoinColumn(name = "class_id")
+    private Class classEntity;
 }
