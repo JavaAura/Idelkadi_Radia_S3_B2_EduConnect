@@ -1,5 +1,7 @@
 package com.spring.eduConnect.controllers;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,5 +53,11 @@ public class ClassController {
     public ResponseEntity<Void> deleteClass(@PathVariable Long id) {
         classService.deleteClass(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/paginated")
+    public ResponseEntity<Page<ClassDTO>> getAllClassesPaginated(Pageable pageable) {
+        Page<ClassDTO> classes = classService.getAllClassesPaginated(pageable);
+        return ResponseEntity.ok(classes);
     }
 }

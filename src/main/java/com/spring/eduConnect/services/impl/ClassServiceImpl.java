@@ -6,6 +6,8 @@ import com.spring.eduConnect.repositories.ClassRepository;
 import com.spring.eduConnect.services.ClassService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -60,5 +62,10 @@ public class ClassServiceImpl implements ClassService {
             throw new EntityNotFoundException("Class not found with id " + id);
         }
         classRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<ClassDTO> getAllClassesPaginated(Pageable pageable) {
+        return classRepository.findAll(pageable).map(classEntity -> modelMapper.map(classEntity, ClassDTO.class));
     }
 }
