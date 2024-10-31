@@ -50,8 +50,4 @@ public class Training {
 
     @OneToMany(mappedBy = "training")
     private List<Trainer> trainers;
-
-    @OneToMany(mappedBy = "training")
-    private List<Class> classes;
-
 }

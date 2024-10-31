@@ -24,10 +24,6 @@ public class Class {
 
     private String roomNumber;
 
-    @ManyToOne
-    @JoinColumn(name = "training_id")
-    private Training training;
-
     @OneToMany(mappedBy = "classEntity")
     private List<Learner> learners;
 

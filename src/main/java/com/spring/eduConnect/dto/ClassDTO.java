@@ -13,5 +13,4 @@ public class ClassDTO {
     private Long id;
     private String name;
     private String roomNumber;
-    private Long trainingId;
 }
