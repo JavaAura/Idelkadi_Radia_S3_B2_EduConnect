@@ -6,6 +6,8 @@ import com.spring.eduConnect.repositories.LearnerRepository;
 import com.spring.eduConnect.services.LearnerService;
 import com.spring.eduConnect.utils.LearnerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -64,5 +66,10 @@ public class LearnerServiceImpl implements LearnerService {
             throw new EntityNotFoundException("Learner not found with id " + id);
         }
         learnerRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<LearnerDTO> getAllLearnersPaginated(Pageable pageable) {
+        return learnerRepository.findAll(pageable).map(learnerEntity -> learnerMapper.toDto(learnerEntity));
     }
 }

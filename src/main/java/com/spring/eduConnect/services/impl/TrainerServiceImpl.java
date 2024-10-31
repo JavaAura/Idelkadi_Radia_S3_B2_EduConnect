@@ -6,6 +6,8 @@ import com.spring.eduConnect.repositories.TrainerRepository;
 import com.spring.eduConnect.services.TrainerService;
 import com.spring.eduConnect.utils.TrainerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -66,5 +68,10 @@ public class TrainerServiceImpl implements TrainerService {
             throw new EntityNotFoundException("Trainer not found with id " + id);
         }
         trainerRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<TrainerDTO> getAllTrainersPaginated(Pageable pageable) {
+        return trainerRepository.findAll(pageable).map(trainerEntity -> trainerMapper.toDto(trainerEntity));
     }
 }

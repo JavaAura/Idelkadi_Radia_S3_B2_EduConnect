@@ -3,6 +3,8 @@ package com.spring.eduConnect.controllers;
 import com.spring.eduConnect.dto.LearnerDTO;
 import com.spring.eduConnect.services.LearnerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,5 +49,11 @@ public class LearnerController {
     public ResponseEntity<Void> deleteLearner(@PathVariable Long id) {
         learnerService.deleteLearner(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/paginated")
+    public ResponseEntity<Page<LearnerDTO>> getAllLearnersPaginated(Pageable pageable) {
+        Page<LearnerDTO> learners = learnerService.getAllLearnersPaginated(pageable);
+        return ResponseEntity.ok(learners);
     }
 }
