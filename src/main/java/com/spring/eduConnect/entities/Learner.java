@@ -15,12 +15,6 @@ public class Learner extends User {
 
     private String level;
 
-    @ManyToOne
-    @JoinColumn(name = "training_id")
-    private Training training;
 
-    @ManyToOne
-    @JoinColumn(name = "class_id")
-    private Class classEntity;
 
 }
