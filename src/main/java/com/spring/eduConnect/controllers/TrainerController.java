@@ -22,21 +22,19 @@ public class TrainerController {
     }
 
     @PostMapping
-    public ResponseEntity<TrainerDTO> createTraining( @RequestBody TrainerDTO trainerDTO) {
+    public ResponseEntity<TrainerDTO> createTrainer(@RequestBody TrainerDTO trainerDTO) {
         TrainerDTO createdTrainer = trainerService.createTrainer(trainerDTO);
         return new ResponseEntity<>(createdTrainer, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TrainerDTO> updateTraining(
-            @PathVariable Long id,
-            @RequestBody TrainerDTO trainerDTO) {
+    public ResponseEntity<TrainerDTO> updateTrainer(@PathVariable Long id, @RequestBody TrainerDTO trainerDTO) {
         TrainerDTO updatedTrainer = trainerService.updateTrainer(id, trainerDTO);
         return ResponseEntity.ok(updatedTrainer);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TrainerDTO> getTrainingById(@PathVariable Long id) {
+    public ResponseEntity<TrainerDTO> getTrainerById(@PathVariable Long id) {
         TrainerDTO trainerDTO = trainerService.getTrainerById(id);
         return ResponseEntity.ok(trainerDTO);
     }

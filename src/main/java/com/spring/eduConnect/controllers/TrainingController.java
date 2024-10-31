@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
 @RestController
 @RequestMapping("/api/training")
 public class TrainingController {
@@ -25,7 +26,7 @@ public class TrainingController {
     }
 
     @PostMapping
-    public ResponseEntity<TrainingDTO> createTraining(@RequestBody TrainingDTO trainingDTO) {
+    public ResponseEntity<TrainingDTO> createTraining(@Valid @RequestBody TrainingDTO trainingDTO) {
         TrainingDTO createdTraining = trainingService.createTraining(trainingDTO);
         return new ResponseEntity<>(createdTraining, HttpStatus.CREATED);
     }
@@ -56,8 +57,6 @@ public class TrainingController {
         return ResponseEntity.noContent().build();
     }
 
-
-
     @GetMapping("/search/title")
     public ResponseEntity<List<TrainingDTO>> getTrainingsByTitle(@RequestParam String title) {
         List<TrainingDTO> trainings = trainingService.getTrainingsByTitle(title);
@@ -85,5 +84,4 @@ public class TrainingController {
         Page<TrainingDTO> trainings = trainingService.getAllTrainingsPaginated(pageable);
         return ResponseEntity.ok(trainings);
     }
-
 }
