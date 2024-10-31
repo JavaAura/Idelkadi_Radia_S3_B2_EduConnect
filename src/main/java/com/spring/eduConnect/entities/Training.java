@@ -50,4 +50,28 @@ public class Training {
 
     @OneToMany(mappedBy = "training")
     private List<Trainer> trainers;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Learner> getLearners() {
+        return learners;
+    }
+
+    public void setLearners(List<Learner> learners) {
+        this.learners = learners;
+    }
+
+    public List<Trainer> getTrainers() {
+        return trainers;
+    }
+
+    public void setTrainers(List<Trainer> trainers) {
+        this.trainers = trainers;
+    }
 }

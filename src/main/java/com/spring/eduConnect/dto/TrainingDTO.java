@@ -5,11 +5,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 public class TrainingDTO {
     private Long id;
     private String title;

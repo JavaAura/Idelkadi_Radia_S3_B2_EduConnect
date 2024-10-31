@@ -38,8 +38,19 @@ public abstract class User {
     @NotNull(message = "Training is required")
     private Training training;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "class_id", nullable = false)
-    @NotNull(message = "Class is required")
-    private Class classEntity;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Training getTraining() {
+        return training;
+    }
+
+    public void setTraining(Training training) {
+        this.training = training;
+    }
 }

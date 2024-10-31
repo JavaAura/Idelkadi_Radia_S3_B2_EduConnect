@@ -2,7 +2,6 @@ package com.spring.eduConnect.services;
 
 import com.spring.eduConnect.dto.LearnerDTO;
 import com.spring.eduConnect.entities.Learner;
-import com.spring.eduConnect.repositories.LearnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +10,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class LearnerService {
-
-    @Autowired
-    private LearnerRepository learnerRepository;
-
+public interface LearnerService {
 
 }
 

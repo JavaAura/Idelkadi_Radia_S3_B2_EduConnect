@@ -28,6 +28,6 @@ public class Class {
     private List<Learner> learners;
 
 
-    @OneToMany(mappedBy = "classEntity")
-    private List<Trainer> trainers ;
+    @OneToOne(mappedBy = "classEntity")
+    private Trainer trainers ;
 }
