@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LearnerRepository extends JpaRepository<Learner, Long> {
+    boolean existsByEmail(String email);
+    boolean existsByEmailAndIdNot(String email, Long id);
 }

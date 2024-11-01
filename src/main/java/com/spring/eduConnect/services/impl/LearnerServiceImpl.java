@@ -2,6 +2,7 @@ package com.spring.eduConnect.services.impl;
 
 import com.spring.eduConnect.dto.LearnerDTO;
 import com.spring.eduConnect.entities.Learner;
+import com.spring.eduConnect.exceptions.DataAlreadyExistsException;
 import com.spring.eduConnect.repositories.LearnerRepository;
 import com.spring.eduConnect.services.LearnerService;
 import com.spring.eduConnect.utils.LearnerMapper;
@@ -28,6 +29,10 @@ public class LearnerServiceImpl implements LearnerService {
 
     @Override
     public LearnerDTO createLearner(LearnerDTO learnerDTO) {
+        if (learnerRepository.existsByEmail(learnerDTO.getEmail())) {
+            throw new DataAlreadyExistsException("Learner with email '" + learnerDTO.getEmail() + "' already exists.");
+        }
+
         Learner learner = learnerMapper.toEntity(learnerDTO);
         learner = learnerRepository.save(learner);
         return learnerMapper.toDto(learner);
@@ -37,6 +42,10 @@ public class LearnerServiceImpl implements LearnerService {
     public LearnerDTO updateLearner(Long id, LearnerDTO learnerDTO) {
         Learner learner = learnerRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Learner not found with id " + id));
+
+        if (learnerRepository.existsByEmailAndIdNot(learnerDTO.getEmail(), id)) {
+            throw new DataAlreadyExistsException("Learner with email '" + learnerDTO.getEmail() + "' already exists.");
+        }
 
         Learner updatedLearner = learnerMapper.toEntity(learnerDTO);
         updatedLearner.setId(learner.getId());

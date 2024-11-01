@@ -23,6 +23,6 @@ public interface TrainingRepository  extends JpaRepository<Training, Long> {
                                                 @Param("endDate") LocalDate endDate);
 
     Page<Training> findAll(Pageable pageable);
-
-
+    boolean existsByTitleAndIdNot(String title, Long id);
+    boolean existsByTitle(String title);
 }

@@ -2,6 +2,7 @@ package com.spring.eduConnect.services.impl;
 
 import com.spring.eduConnect.dto.TrainerDTO;
 import com.spring.eduConnect.entities.Trainer;
+import com.spring.eduConnect.exceptions.DataAlreadyExistsException;
 import com.spring.eduConnect.repositories.TrainerRepository;
 import com.spring.eduConnect.services.TrainerService;
 import com.spring.eduConnect.utils.TrainerMapper;
@@ -28,6 +29,9 @@ public class TrainerServiceImpl implements TrainerService {
 
     @Override
     public TrainerDTO createTrainer(TrainerDTO trainerDTO) {
+        if (trainerRepository.existsByEmail(trainerDTO.getEmail())) {
+            throw new DataAlreadyExistsException("Trainer with email '" + trainerDTO.getEmail() + "' already exists.");
+        }
 
         Trainer trainer = trainerMapper.toEntity(trainerDTO);
         trainer = trainerRepository.save(trainer);
@@ -39,6 +43,11 @@ public class TrainerServiceImpl implements TrainerService {
         Trainer trainer = trainerRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Trainer not found with id " + id));
 
+        // Vérifier si un formateur avec le même email existe déjà (autre que celui en cours de mise à jour)
+        if (trainerRepository.existsByEmailAndIdNot(trainerDTO.getEmail(), id)) {
+            throw new DataAlreadyExistsException("Trainer with email '" + trainerDTO.getEmail() + "' already exists.");
+        }
+
         Trainer updatedTrainer = trainerMapper.toEntity(trainerDTO);
         updatedTrainer.setId(trainer.getId());
 
@@ -47,18 +56,17 @@ public class TrainerServiceImpl implements TrainerService {
         return trainerMapper.toDto(updatedTrainer);
     }
 
-
     @Override
     public TrainerDTO getTrainerById(Long id) {
-        Trainer Trainer = trainerRepository.findById(id)
+        Trainer trainer = trainerRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Trainer not found with id " + id));
-        return trainerMapper.toDto(Trainer);
+        return trainerMapper.toDto(trainer);
     }
 
     @Override
     public List<TrainerDTO> getAllTrainers() {
         return trainerRepository.findAll().stream()
-                .map(trainer -> trainerMapper.toDto(trainer))
+                .map(trainerMapper::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -72,6 +80,6 @@ public class TrainerServiceImpl implements TrainerService {
 
     @Override
     public Page<TrainerDTO> getAllTrainersPaginated(Pageable pageable) {
-        return trainerRepository.findAll(pageable).map(trainerEntity -> trainerMapper.toDto(trainerEntity));
+        return trainerRepository.findAll(pageable).map(trainerMapper::toDto);
     }
 }

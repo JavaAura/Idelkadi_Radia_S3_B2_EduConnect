@@ -2,6 +2,7 @@ package com.spring.eduConnect.services.impl;
 
 import com.spring.eduConnect.dto.ClassDTO;
 import com.spring.eduConnect.entities.Class;
+import com.spring.eduConnect.exceptions.DataAlreadyExistsException;
 import com.spring.eduConnect.repositories.ClassRepository;
 import com.spring.eduConnect.services.ClassService;
 import org.modelmapper.ModelMapper;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,6 +29,10 @@ public class ClassServiceImpl implements ClassService {
 
     @Override
     public ClassDTO createClass(ClassDTO classDTO) {
+        if (classRepository.existsByName(classDTO.getName())) {
+            throw new DataAlreadyExistsException("Class with name '" + classDTO.getName() + "' already exists.");
+        }
+
         Class classEntity = modelMapper.map(classDTO, Class.class);
         classEntity = classRepository.save(classEntity);
         return modelMapper.map(classEntity, ClassDTO.class);
