@@ -31,10 +31,10 @@ public class Training {
     private String prerequisites;
 
     @NotNull(message = "Minimum capacity is required")
-    private int minimumCapacity;
+    private int minCapacity;
 
     @NotNull(message = "Maximum capacity is required")
-    private int maximumCapacity;
+    private int maxCapacity;
 
     @NotNull(message = "Start date is required")
     private LocalDate startDate;
