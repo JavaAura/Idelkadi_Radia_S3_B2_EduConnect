@@ -48,8 +48,8 @@ public class ClassController {
     @PutMapping("/{id}")
     public ResponseEntity<ClassDTO> updateClass(
             @PathVariable @Parameter(description = "ID of the class to be updated") Long id,
-            @RequestBody ClassDTO classDTO) {
-        logger.info("Updating class with ID: {}", id);
+                @RequestBody ClassDTO classDTO) {
+            logger.info("Updating class with ID: {}", id);
         ClassDTO updatedClass = classService.updateClass(id, classDTO);
         logger.info("Class updated with ID: {}", updatedClass.getId());
         return ResponseEntity.ok(updatedClass);

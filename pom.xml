@@ -19,6 +19,7 @@
 		<lombok.version>1.18.26</lombok.version>
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

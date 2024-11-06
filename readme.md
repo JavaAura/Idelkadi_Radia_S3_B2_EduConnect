@@ -148,7 +148,7 @@ A training center aims to digitalize its training management through a REST API.
 ### 🛠 Clone the Project
 
 ```bash
-git clone <your-repo-link>
+git clone https://github.com/Radiaidel/EduConnect
 ```
 
 ### 🚀 Run the Application
@@ -182,6 +182,5 @@ http://localhost:8080/swagger-ui.html
 
 ### 📝 Author
 
-Your Name
-[Your Email Address]
-[Your LinkedIn Profile or GitHub Link]
+* Idelkadi Radia 
+* idelkadiradia@gmail.com
